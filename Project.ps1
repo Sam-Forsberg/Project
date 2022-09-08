@@ -1,4 +1,72 @@
-﻿
+﻿#Variables
+    $time = get-date -Format f
+    $shelly = write-host ($text) -for Yellow
+    $sheldon = write-host -for Red 
+  #User Accounts
+    $accounts = Get-CimInstance -ComputerName $computername -ClassName win32_UserAccount -filter "LocalAccount=True" 
+
+    #Storage Drives
+    $drives = get-psdrive -psprovider FileSystem
+
+    #look it's me!
+    $me = get-process -name powershell
+
+
+#Preloads
+<#
+.Synopsis
+   Short description
+.DESCRIPTION
+   Long description
+.EXAMPLE
+   Example of how to use this cmdlet
+.EXAMPLE
+   Another example of how to use this cmdlet
+#>
+function new-speech {
+    Param
+    (
+        [Parameter(Mandatory = $true, 
+            ValueFromPipeline = $true)]
+        [string]$text
+    )
+
+    #set up .net object for use
+    Add-Type -AssemblyName System.Speech 
+    $synth = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer
+    #$synth.GetInstalledVoices().Voiceinfo
+    $synth.SelectVoice('Microsoft Zira Desktop')
+   # Write-Host $text
+    $synth.speak($text)
+    $synth.Rate = 10
+ 
+}
+
+function bad-speech {
+    Param
+    (
+        [Parameter(Mandatory = $true, 
+            ValueFromPipeline = $true)]
+        [string]$text
+    )
+
+    #set up .net object for use
+    Add-Type -AssemblyName System.Speech 
+    $synth = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer
+    #$synth.GetInstalledVoices().Voiceinfo
+    $synth.SelectVoice('Microsoft David Desktop')
+   # Write-Host $text
+    $synth.speak($text)
+    $synth.volume = 100
+    $synth.Rate = 10
+ 
+}
+
+#Test function
+#new-speech 'Hello My name is Zira'
+#Important note- speech MUST come after text 
+##################################################
+
 
 function Setup-Display()
 {
@@ -125,8 +193,8 @@ function Part3-ShowOff
     write-host "I'll show you how I can retrieve information for you.";sleep 5
     clear-host
 
-    wite-host ""
-    write-host "By selecting 1, 2, 3 or 4 I can show you information about your system that correlates to that selection";sleep 6
+    write-host ""
+    write-host "By selecting 1, 2, 3 or 4 I can show you information about your system that correlates to that selection.";sleep 6
     clear-host
 
     write-host ""
@@ -218,21 +286,22 @@ function Part4-Sheldon
         {
             "Y" {write-host ""
                 Write-host "Knock knock" -for Red
+                bad-speech "Knock Knock"
                 read-host "Answer"
-                bad-speech "Knock Knock";sleep 1
                 clear-host
             
                 write-host ""
                 write-host "Orange" -fore Red
+                bad-speech "Orange"
                 read-host "Answer"
-                bad-speech "Orange";sleep 1
                 clear-host
 
                 write-host ""
                 write-host "Orange you glad I didn't say Banana?"
-                bad-speech "Orange you glad I didn't say Banana?";sleep 1
+                bad-speech "Orange you glad I didn't say Banana?"
                 clear-host
             
+                write-host ""
                 write-host "Ha Ha. I crack myself up." 
                 bad-speech "Ha Ha. I crack myself up."
                 clear-host
@@ -252,7 +321,7 @@ function Part4-Sheldon
     write-host ""
     write-host "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?"
     bad-speech "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?"
-    cleat-host
+    clear-host
 
     write-host ""
     write-host "That's so boring. I'm glad I showed up when I did."
@@ -273,6 +342,24 @@ function Part4-Sheldon
 
 function Part5-GUI 
 {
+    Add-Type -AssemblyName PresentationFramework
+    [System.Windows.MessageBox]::Show('    Hello Chungus!    ', '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    Are you tired of Shellys boring commands?    ', '( ͡° ͜ʖ ͡°) Sheldon', 'YesNo')
+    [System.Windows.MessageBox]::Show('    Would you like to hear another joke?    ' , '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.windows.messagebox]::Show('    The amount of effort the CREATOR put into the end of this project!    ', '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    Alright, its time for my last party trick    '. '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    I will take the best picture you have ever had    ' , '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    This is going to be a show stopper of a picture    ' , '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.messagebox]::Show('    Smile BIG!    ', '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    Smile bigger than that!
+    This is going to be your new profile picture for EVERYTHING!' ,'( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    This is going to be perfect!
+    3....2....1' , '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    Great job!
+    Your new picture is now ready!
+    Just click the OK button!' , '( ͡° ͜ʖ ͡°) Shelson')
+        Invoke-WebRequest -Uri 'https://github.com/Sam-Forsberg/Project/blob/main/User%20Picture.jpg'
+    
     
 }
 
@@ -295,71 +382,3 @@ while($true)
 
     
 
-#Variables
-    $time = get-date -Format f
-    $shelly = write-host ($text) -for Yellow
-    $sheldon = write-host -for Red 
-  #User Accounts
-    $accounts = Get-CimInstance -ComputerName $computername -ClassName win32_UserAccount -filter "LocalAccount=True" 
-
-    #Storage Drives
-    $drives = get-psdrive -psprovider FileSystem
-
-    #look it's me!
-    $me = get-process -name powershell
-
-
-#Preloads
-<#
-.Synopsis
-   Short description
-.DESCRIPTION
-   Long description
-.EXAMPLE
-   Example of how to use this cmdlet
-.EXAMPLE
-   Another example of how to use this cmdlet
-#>
-function new-speech {
-    Param
-    (
-        [Parameter(Mandatory = $true, 
-            ValueFromPipeline = $true)]
-        [string]$text
-    )
-
-    #set up .net object for use
-    Add-Type -AssemblyName System.Speech 
-    $synth = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer
-    #$synth.GetInstalledVoices().Voiceinfo
-    $synth.SelectVoice('Microsoft Zira Desktop')
-   # Write-Host $text
-    $synth.speak($text)
-    $synth.Rate = 10
- 
-}
-
-function bad-speech {
-    Param
-    (
-        [Parameter(Mandatory = $true, 
-            ValueFromPipeline = $true)]
-        [string]$text
-    )
-
-    #set up .net object for use
-    Add-Type -AssemblyName System.Speech 
-    $synth = New-Object -TypeName System.Speech.Synthesis.SpeechSynthesizer
-    #$synth.GetInstalledVoices().Voiceinfo
-    $synth.SelectVoice('Microsoft David Desktop')
-   # Write-Host $text
-    $synth.speak($text)
-    $synth.volume = 100
-    $synth.Rate = 10
- 
-}
-
-#Test function
-#new-speech 'Hello My name is Zira'
-#Important note- speech MUST come after text 
-##################################################
