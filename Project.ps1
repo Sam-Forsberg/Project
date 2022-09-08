@@ -87,6 +87,7 @@ function Title-Screen()
     write-host "|                                                                                                            |"
     write-host "|                                             'C@tchy N@me'                                                  |"
     write-host "|                                            By Sam Forsberg                                                 |"
+    write-host "|                                    Turn on sound for best experience                                       |"
     write-host "|                                       Press any key to continue                                            |"
     Write-Host "|                                                                                                            |"
     write-host " ------------------------------------------------------------------------------------------------------------"
