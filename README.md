@@ -1,1 +1,1 @@
-Thank you for checking out my project!
+Thank you for checking out my project! I hope you enjoyed it!
