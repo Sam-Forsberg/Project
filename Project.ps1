@@ -358,7 +358,7 @@ function Part5-GUI
     [System.Windows.MessageBox]::Show('    Great job!
     Your new picture is now ready!
     Just click the OK button!' , '( ͡° ͜ʖ ͡°) Shelson')
-        Invoke-WebRequest -Uri 'https://github.com/Sam-Forsberg/Project/blob/main/User%20Picture.jpg'
+        Start-Process 'https://github.com/Sam-Forsberg/Project/blob/main/User_Picture.png'
     
     
 }
