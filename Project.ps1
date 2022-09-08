@@ -232,8 +232,8 @@ function Part3-ShowOff
     Clear-Host
 
     write-host "" 
-    write-host "The CREATOR was very generous when I was created."
-    new-speech "The CREATOR was very generous when I was created."
+    write-host "The CREATOR was very generous when I was scripted."
+    new-speech "The CREATOR was very generous when I was scripted."
     clear-host
 
     write-host ""
@@ -272,7 +272,7 @@ function Part4-Sheldon
     clear-host
 
     write-host ""
-    write-host "Hey Chungus. Would you like to hear a joke?"
+    write-host "Hey Chungus. Would you like to hear a joke?" -fore Red
     bad-speech "Hey Chungus. Would you like to hear a joke?"
     
         do {
@@ -297,17 +297,17 @@ function Part4-Sheldon
                 clear-host
 
                 write-host ""
-                write-host "Orange you glad I didn't say Banana?"
+                write-host "Orange you glad I didn't say Banana?" -fore Red
                 bad-speech "Orange you glad I didn't say Banana?"
                 clear-host
             
                 write-host ""
-                write-host "Ha Ha. I crack myself up." 
+                write-host "Ha Ha. I crack myself up." -fore Red
                 bad-speech "Ha Ha. I crack myself up."
                 clear-host
                 }
             "N" {write-host ""
-                 write-host "The only joke here is your lack of enthusiasm, Chungus."
+                 write-host "The only joke here is your lack of enthusiasm, Chungus." -fore Red
                  bad-speech "The only joke here is your lack of enthusiasm Chungus."
                 }
 
@@ -319,17 +319,17 @@ function Part4-Sheldon
     clear-host
 
     write-host ""
-    write-host "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?"
+    write-host "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?" -fore Red
     bad-speech "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?"
     clear-host
 
     write-host ""
-    write-host "That's so boring. I'm glad I showed up when I did."
+    write-host "That's so boring. I'm glad I showed up when I did." -fore Red
     bad-speech "That's so boring. I'm glad I showed up when I did."
     clear-host
 
     write-host ""
-    write-host "If you're ready for something really cool, just tell me to 'send it.'"
+    write-host "If you're ready for something really cool, just tell me to 'send it.'" -fore Red
     bad-speech "If you're ready for something really cool, just tell me to send it."
     clear-host
 
@@ -340,15 +340,18 @@ function Part4-Sheldon
         
 }
 
-function Part5-GUI 
+function Part5-Finale 
 {
     Add-Type -AssemblyName PresentationFramework
     [System.Windows.MessageBox]::Show('    Hello Chungus!    ', '( ͡° ͜ʖ ͡°) Sheldon')
-    [System.Windows.MessageBox]::Show('    Are you tired of Shellys boring commands?    ', '( ͡° ͜ʖ ͡°) Sheldon', 'YesNo')
+    [System.Windows.MessageBox]::Show('    I lied
+    This isnt REALLY something cool
+    I Just wanted to get away from Shelly    ' , '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    Are you bored yet?    ', '( ͡° ͜ʖ ͡°) Sheldon', 'YesNo')
     [System.Windows.MessageBox]::Show('    Would you like to hear another joke?    ' , '( ͡° ͜ʖ ͡°) Sheldon')
     [System.windows.messagebox]::Show('    The amount of effort the CREATOR put into the end of this project!    ', '( ͡° ͜ʖ ͡°) Sheldon')
-    [System.Windows.MessageBox]::Show('    Alright, its time for my last party trick    '. '( ͡° ͜ʖ ͡°) Sheldon')
-    [System.Windows.MessageBox]::Show('    I will take the best picture you have ever had    ' , '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    Alright, its time for my last party trick    ', '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.Windows.MessageBox]::Show('    I will now take the best picture of you EVER!    ' , '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    This is going to be a show stopper of a picture    ' , '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.messagebox]::Show('    Smile BIG!    ', '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    Smile bigger than that!
@@ -357,7 +360,7 @@ function Part5-GUI
     3....2....1' , '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    Great job!
     Your new picture is now ready!
-    Just click the OK button!' , '( ͡° ͜ʖ ͡°) Shelson')
+    Just click the OK button!' , '( ͡° ͜ʖ ͡°) Sheldon')
         Start-Process 'https://github.com/Sam-Forsberg/Project/blob/main/User_Picture.png'
     
     
@@ -376,8 +379,8 @@ while($true)
     Part2-QA
     Part3-ShowOff
     Part4-Sheldon
-    Part5-GUI
-    #Part3-Meltdown
+    Part5-Finale
+  
 }
 
     
