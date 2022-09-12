@@ -1,15 +1,14 @@
-﻿#Variables
+﻿#Welcome to my script! Recommened that you right click .ps1 file and run with basic powershell.
+#Thank you Chris Mcghee for the synthesizer idea!
+
+#Variables
     $time = get-date -Format f
-    $shelly = write-host ($text) -for Yellow
-    $sheldon = write-host -for Red 
+     
   #User Accounts
     $accounts = Get-CimInstance -ComputerName $computername -ClassName win32_UserAccount -filter "LocalAccount=True" 
 
     #Storage Drives
     $drives = get-psdrive -psprovider FileSystem
-
-    #look it's me!
-    $me = get-process -name powershell
 
 
 #Preloads
@@ -136,7 +135,7 @@ function Part2-QA
     
     write-host ""
     do {
-    $response = Read-host "Are you familiar with your systems dialect? (Y/N)";sleep 1
+    $response = Read-host "Are you familiar with your systems dialect? (Y/N)";sleep 0.5
     }
     while ($response -notlike "Y" -and $response -notlike "N")
     clear-host
@@ -149,7 +148,7 @@ function Part2-QA
     clear-host 
     
     write-host ""
-    Read-Host "First, let's start by telling me how long you've been using Powershell"
+    read-host "First, let's start by telling me how long you've been using Powershell"
     clear-host
     
     write-host ""
@@ -198,30 +197,47 @@ function Part3-ShowOff
     write-host "By selecting 1, 2, 3 or 4 I can show you information about your system that correlates to that selection.";sleep 6
     clear-host
 
-    write-host ""
-    write-host "Your options are:"
-    write-host ""
-    write-host "      1: Look at all the accounts associated with your system";sleep 0.25
-    write-host "      2: See all the storage drives your system has and the remaining amount of space on them.";sleep 0.25
-    write-host "      3: Find all the processes or, better known as, all runnning programs on your system.";sleep 0.25
-    write-host "      4: Check the current date/time";sleep 1
-    write-host  ""
-    $userresponse = read-host "                       Make your selection"
+    do
+        {
+            write-host ""
+            write-host "Your options are:"
+            write-host ""
+            write-host "      1: Look at all the accounts associated with your system";sleep 0.25
+            write-host "      2: See all the storage drives your system has and the remaining amount of space on them.";sleep 0.25
+            write-host "      3: Find all the processes or, better known as, all runnning programs on your system.";sleep 0.25
+            write-host "      4: Check the current date/time";sleep 0.25
+            write-host  ""
+        $userresponse = read-host "                       Make your selection"
 
-        switch ($userresponse)
+            switch ($userresponse)
+                {
+                    "1" {$accounts}
+                    "2" {$drives}
+                    "3" {get-process}
+                    "4" {$time}
+                }
+        ;sleep 6
+  
+
+            if ($userresponse -like "3")
             {
-                "1" {$accounts}
-                "2" {$drives}
-                "3" {get-process}
-                "4" {$time}
+                clear-host
+                write-host ""
+                write-host "Look, it's me!"
+                get-process powershell;sleep 3
             }
-    ;sleep 8
+            clear-host
+        
+            $choice = read-host "Would you like to view another option? (Y/N)"
+            clear-host
+        }
+    until ($choice -like "N")
     clear-host
-
             
+    write-host ""
+    write-host "Alright, moving on";sleep 3
 
-
-
+    clear-host
     write-host ""
     Write-host "I can even talk to you if you prefer that. Here's an example!";sleep 3
     new-speech "Right now it is $time" 
@@ -234,12 +250,12 @@ function Part3-ShowOff
 
     write-host "" 
     write-host "The CREATOR was very generous when I was scripted."
-    new-speech "The CREATOR was very generous when I was scripted."
+    new-speech "The CREATOR was very generous when I was scripted.";sleep 0.5
     clear-host
 
     write-host ""
     write-host "The CREATOR really cares about the users. About you, Chungus."
-    new-speech "The CREATOR really cares about the users. About, you, Chungus."
+    new-speech "The CREATOR really cares about the users. About, you, Chungus.";sleep 0.5
     clear-host
 
     write-host ""
@@ -258,23 +274,23 @@ function Part4-Sheldon
     read-host "Ask me anything"
     Clear-Host
 
-    bad-speech "8 6 7 5 3 O 9"
+    bad-speech "8 6 7 5 3 O 9";sleep 1
 
     write-host ""
     write-host "Go away Sheldon. I'm trying to teach a new user."
-    new-speech "Go away Sheldon. I'm trying to teach a new user."
+    new-speech "Go away Sheldon. I'm trying to teach a new user.";sleep 1
     clear-host
 
     bad-speech "He he he"
 
     write-host "" 
     write-host "I'm terribly sorry about this Chungus."
-    new-speech "I'm terribly sorry about this Chungus."
+    new-speech "I'm terribly sorry about this Chungus.";sleep 1
     clear-host
 
     write-host ""
     write-host "Hey Chungus. Would you like to hear a joke?" -fore Red
-    bad-speech "Hey Chungus. Would you like to hear a joke?"
+    bad-speech "Hey Chungus. Would you like to hear a joke?";
     
         do {
         $answer = read-host "(Y/N)";sleep 0.5
@@ -299,12 +315,12 @@ function Part4-Sheldon
 
                 write-host ""
                 write-host "Orange you glad I didn't say Banana?" -fore Red
-                bad-speech "Orange you glad I didn't say Banana?"
+                bad-speech "Orange you glad I didn't say Banana?";sleep 1
                 clear-host
             
                 write-host ""
                 write-host "Ha Ha. I crack myself up." -fore Red
-                bad-speech "Ha Ha. I crack myself up."
+                bad-speech "Ha Ha. I crack myself up.";sleep 1
                 clear-host
                 }
             "N" {write-host ""
@@ -316,17 +332,17 @@ function Part4-Sheldon
     
     write-host ""
     write-host "Sheldon, you're being rude."
-    new-speech "Sheldon, you're being rude"
+    new-speech "Sheldon, you're being rude";sleep 1
     clear-host
 
     write-host ""
     write-host "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?" -fore Red
-    bad-speech "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?"
+    bad-speech "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?";sleep 1
     clear-host
 
     write-host ""
     write-host "That's so boring. I'm glad I showed up when I did." -fore Red
-    bad-speech "That's so boring. I'm glad I showed up when I did."
+    bad-speech "That's so boring. I'm glad I showed up when I did.";sleep 0.8
     clear-host
 
     write-host ""
@@ -350,7 +366,7 @@ function Part5-Finale
     I Just wanted to get away from Shelly    ' , '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    Are you bored yet?    ', '( ͡° ͜ʖ ͡°) Sheldon', 'YesNo')
     [System.Windows.MessageBox]::Show('    Would you like to hear another joke?    ' , '( ͡° ͜ʖ ͡°) Sheldon')
-    [System.windows.messagebox]::Show('    The amount of effort the CREATOR put into the end of this project!    ', '( ͡° ͜ʖ ͡°) Sheldon')
+    [System.windows.messagebox]::Show('    The amount of effort the WRITER put into the end of this project!    ', '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    Alright, its time for my last party trick    ', '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    I will now take the best picture of you EVER!    ' , '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    This is going to be a show stopper of a picture    ' , '( ͡° ͜ʖ ͡°) Sheldon')
@@ -384,5 +400,5 @@ while($true)
   
 }
 
-    
+
 
