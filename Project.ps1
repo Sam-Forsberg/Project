@@ -382,9 +382,8 @@ function Part5-Finale
     [System.Windows.messagebox]::Show('    Smile BIG!    ', '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    Smile bigger than that!
     This is going to be your new profile picture for EVERYTHING!' ,'( ͡° ͜ʖ ͡°) Sheldon')
-        
-            
-        [System.Windows.MessageBox]::Show('    Great job!
+    [System.Windows.MessageBox]::Show('    Whenever you are ready just hit the OK button!    ' , '( ͡° ͜ʖ ͡°) Sheldon')    
+    [System.Windows.MessageBox]::Show('    Great job!
         Your new picture is now ready!
         Just click the OK button!' , '( ͡° ͜ʖ ͡°) Sheldon')
     Start-Process 'https://github.com/Sam-Forsberg/Project/blob/main/User_Picture.png'
