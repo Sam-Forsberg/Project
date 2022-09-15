@@ -5,24 +5,25 @@
     $time = get-date -Format f
      
   #User Accounts
-    $accounts = Get-CimInstance -ComputerName $computername -ClassName win32_UserAccount -filter "LocalAccount=True" 
+    $accounts = Get-CimInstance -ComputerName $computername -ClassName win32_UserAccount -filter "LocalAccount=True" | ft
 
     #Storage Drives
-    $drives = get-psdrive -psprovider FileSystem
+    $drives = get-psdrive -psprovider FileSystem | ft
 
-
+    
 #Preloads
-<#
-.Synopsis
-   Short description
-.DESCRIPTION
-   Long description
-.EXAMPLE
-   Example of how to use this cmdlet
-.EXAMPLE
-   Another example of how to use this cmdlet
-#>
-function new-speech {
+
+function Setup-Display()
+{
+    $phost   = get-host
+    $pwindow = $phost.ui.rawui
+    $newsize = $pwindow.windowsize
+    $newsize.height = 55
+    $newsize.width  = 110
+    $pwindow.windowsize = $newsize
+}
+
+function shelly-speech {
     Param
     (
         [Parameter(Mandatory = $true, 
@@ -41,7 +42,7 @@ function new-speech {
  
 }
 
-function bad-speech {
+function sheldon-speech {
     Param
     (
         [Parameter(Mandatory = $true, 
@@ -62,21 +63,19 @@ function bad-speech {
 }
 
 #Test function
-#new-speech 'Hello My name is Zira'
-#Important note- speech MUST come after text 
-##################################################
+#shelly-speech 'Hello My name is Zira'
+#Important note: speech MUST come after text
 
+function the-matrix {
+} 
 
-function Setup-Display()
-{
-    $phost   = get-host
-    $pwindow = $phost.ui.rawui
-    $newsize = $pwindow.windowsize
-    $newsize.height = 55
-    $newsize.width  = 110
-    $pwindow.windowsize = $newsize
+function sheldon-window {
 }
 
+
+
+
+##################################################
 function Title-Screen()
 {
     #Clear Console
@@ -87,11 +86,12 @@ function Title-Screen()
     write-host "|                                             'C@tchy N@me'                                                  |"
     write-host "|                                            By Sam Forsberg                                                 |"
     write-host "|                                    Turn on sound for best experience                                       |"
+    write-host "|                                     Press CTRL+C to quit at any time                                       |"
     write-host "|                                       Press any key to continue                                            |"
     Write-Host "|                                                                                                            |"
     write-host " ------------------------------------------------------------------------------------------------------------"
 
-    $continue = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown") 
+   $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
 }
 
@@ -107,19 +107,28 @@ function Part1-Introduction()
         write-host ""
         $userName = Read-Host -Prompt "What's your name?"
             clear-host
+        if ($userName -like 'Chungus')
+          { write-host "" 
+            write-host "I've finally found you Chungus. This is a simulation. Please wake up!";sleep 4
+            clear-host
+            exit 
+          } 
+        
+        else
+            {
+                write-host ""
+                Write-Host "Hmm, $userName.   
     
-    write-host ""
-    Write-Host "Hmm, $userName.   
-    
-    No, I don't think I like that name.";Sleep 4
-        clear-host
+                No, I don't think I like that name.";Sleep 4
+                    clear-host
    
-    write-host ""
-    Write-Host "I'll just call you Chungus instead.";Sleep 4
-        clear-host
+                write-host ""
+                Write-Host "I'll just call you Chungus instead.";Sleep 4
+                    clear-host
     
-    write-host ""
-    Write-Host "It's a pleasure to make your aquaintance Chungus!";Sleep 4
+                write-host ""
+                Write-Host "It's a pleasure to make your acquaintance Chungus!";Sleep 4
+            }
     
     
 }
@@ -213,7 +222,7 @@ function Part3-ShowOff
                 {
                     "1" {$accounts}
                     "2" {$drives}
-                    "3" {get-process}
+                    "3" {get-process | ft}
                     "4" {$time}
                 }
         ;sleep 6
@@ -224,7 +233,7 @@ function Part3-ShowOff
                 clear-host
                 write-host ""
                 write-host "Look, it's me!"
-                get-process powershell;sleep 3
+                get-process powershell | ft;sleep 3
             }
             clear-host
         
@@ -235,32 +244,32 @@ function Part3-ShowOff
     clear-host
             
     write-host ""
-    write-host "Alright, moving on";sleep 3
+    write-host "Alright, moving on.";sleep 3
 
     clear-host
     write-host ""
-    Write-host "I can even talk to you if you prefer that. Here's an example!";sleep 3
-    new-speech "Right now it is $time" 
+    Write-host "I can even speak to you if you prefer that. Here's an example!";sleep 3
+    shelly-speech "Right now it is $time" 
     clear-host
    
     write-host ""
-    write-host "Pretty cool, right?";sleep 0.25
-    new-speech "Pretty cool, right?"
+    write-host "Pretty cool, right?"
+    shelly-speech "Pretty cool, right?";sleep 1
     Clear-Host
 
     write-host "" 
     write-host "The CREATOR was very generous when I was scripted."
-    new-speech "The CREATOR was very generous when I was scripted.";sleep 0.5
+    shelly-speech "The CREATOR was very generous when I was scripted.";sleep 1
     clear-host
 
     write-host ""
     write-host "The CREATOR really cares about the users. About you, Chungus."
-    new-speech "The CREATOR really cares about the users. About, you, Chungus.";sleep 0.5
+    shelly-speech "The CREATOR really cares about the users. About, you, Chungus.";sleep 1
     clear-host
 
     write-host ""
     write-host "One day this technology may reach every person on earth and empower them to be their best self."
-    new-speech "One day this technology may reach every person on earth and empower them to be their best self."
+    shelly-speech "One day this technology may reach every person on earth and empower them to be their best self.";sleep 1
     clear-host
 
 }
@@ -270,27 +279,27 @@ function Part4-Sheldon
 {
     write-host ""
     write-host "So now that I've shown you what my purpose is and how I may assist you."
-    new-speech "So now that I've shown you what my purpose is and how I may assist you. Ask me anything"
+    shelly-speech "So now that I've shown you what my purpose is and how I may assist you. Ask me anything"
     read-host "Ask me anything"
     Clear-Host
 
-    bad-speech "8 6 7 5 3 O 9";sleep 1
+    sheldon-speech "8 6 7 5 3 O 9";sleep 1
 
     write-host ""
     write-host "Go away Sheldon. I'm trying to teach a new user."
-    new-speech "Go away Sheldon. I'm trying to teach a new user.";sleep 1
+    shelly-speech "Go away Sheldon. I'm trying to teach a new user.";sleep 1
     clear-host
 
-    bad-speech "He he he"
+    sheldon-speech "He he he"
 
     write-host "" 
     write-host "I'm terribly sorry about this Chungus."
-    new-speech "I'm terribly sorry about this Chungus.";sleep 1
+    shelly-speech "I'm terribly sorry about this Chungus.";sleep 1
     clear-host
 
     write-host ""
     write-host "Hey Chungus. Would you like to hear a joke?" -fore Red
-    bad-speech "Hey Chungus. Would you like to hear a joke?";
+    sheldon-speech "Hey Chungus. Would you like to hear a joke?";
     
         do {
         $answer = read-host "(Y/N)";sleep 0.5
@@ -303,51 +312,51 @@ function Part4-Sheldon
         {
             "Y" {write-host ""
                 Write-host "Knock knock" -for Red
-                bad-speech "Knock Knock"
+                sheldon-speech "Knock Knock"
                 read-host "Answer"
                 clear-host
             
                 write-host ""
                 write-host "Orange" -fore Red
-                bad-speech "Orange"
+                sheldon-speech "Orange"
                 read-host "Answer"
                 clear-host
 
                 write-host ""
                 write-host "Orange you glad I didn't say Banana?" -fore Red
-                bad-speech "Orange you glad I didn't say Banana?";sleep 1
+                sheldon-speech "Orange you glad I didn't say Banana?";sleep 1
                 clear-host
             
                 write-host ""
                 write-host "Ha Ha. I crack myself up." -fore Red
-                bad-speech "Ha Ha. I crack myself up.";sleep 1
+                sheldon-speech "Ha Ha. I crack myself up.";sleep 1
                 clear-host
                 }
             "N" {write-host ""
                  write-host "The only joke here is your lack of enthusiasm, Chungus." -fore Red
-                 bad-speech "The only joke here is your lack of enthusiasm Chungus."
+                 sheldon-speech "The only joke here is your lack of enthusiasm Chungus."
                 }
 
         }    clear-host
     
     write-host ""
     write-host "Sheldon, you're being rude."
-    new-speech "Sheldon, you're being rude";sleep 1
+    shelly-speech "Sheldon, you're being rude";sleep 1
     clear-host
 
     write-host ""
     write-host "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?" -fore Red
-    bad-speech "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?";sleep 1
+    sheldon-speech "Let me guess. Shelly showed you the pick 1 2 3 or 4 trick?";sleep 1
     clear-host
 
     write-host ""
     write-host "That's so boring. I'm glad I showed up when I did." -fore Red
-    bad-speech "That's so boring. I'm glad I showed up when I did.";sleep 0.8
+    sheldon-speech "That's so boring. I'm glad I showed up when I did.";sleep 0.8
     clear-host
 
     write-host ""
     write-host "If you're ready for something really cool, just tell me to 'send it.'" -fore Red
-    bad-speech "If you're ready for something really cool, just tell me to send it."
+    sheldon-speech "If you're ready for something really cool, just tell me to send it."
     clear-host
 
     write-host ""
@@ -373,12 +382,12 @@ function Part5-Finale
     [System.Windows.messagebox]::Show('    Smile BIG!    ', '( ͡° ͜ʖ ͡°) Sheldon')
     [System.Windows.MessageBox]::Show('    Smile bigger than that!
     This is going to be your new profile picture for EVERYTHING!' ,'( ͡° ͜ʖ ͡°) Sheldon')
-    [System.Windows.MessageBox]::Show('    This is going to be perfect!
-    3....2....1' , '( ͡° ͜ʖ ͡°) Sheldon')
-    [System.Windows.MessageBox]::Show('    Great job!
-    Your new picture is now ready!
-    Just click the OK button!' , '( ͡° ͜ʖ ͡°) Sheldon')
-        Start-Process 'https://github.com/Sam-Forsberg/Project/blob/main/User_Picture.png'
+        
+            
+        [System.Windows.MessageBox]::Show('    Great job!
+        Your new picture is now ready!
+        Just click the OK button!' , '( ͡° ͜ʖ ͡°) Sheldon')
+    Start-Process 'https://github.com/Sam-Forsberg/Project/blob/main/User_Picture.png'
     
     
 }
@@ -391,14 +400,11 @@ Setup-Display
 while($true)
 {
     
-    Title-Screen
-    Part1-Introduction
-    Part2-QA
-    Part3-ShowOff
-    Part4-Sheldon
-    Part5-Finale
-  
+        Title-Screen
+        Part1-Introduction
+        Part2-QA
+        Part3-ShowOff
+        Part4-Sheldon
+        Part5-Finale
 }
-
-
 
